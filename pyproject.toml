@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prompt2cinema"
+version = "0.1.0"
+description = "Text-to-cinematic pipeline: LLM prompt enhancement, agentic shot planning, video+audio+VFX with 720p–8K presets"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Balaram Sahu" }]
+dependencies = [
+  "Pillow>=10.0.0",
+  "imageio>=2.34.0",
+  "imageio-ffmpeg>=0.5.1",
+]
+keywords = ["video", "text-to-video", "vfx", "generative-ai", "agents", "rag", "mcp"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+prompt2cinema = "prompt2cinema.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

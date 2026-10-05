@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+      - name: Unit tests
+        run: pytest -q
+      - name: Smoke render (720p / 2s)
+        run: |
+          prompt2cinema "misty forest path at dawn" --preset 720p --duration 2 --out outputs/ci
+          test -f outputs/ci/cinema_720p_24fps.mp4
